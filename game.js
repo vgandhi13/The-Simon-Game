@@ -1,4 +1,20 @@
 // import Math;
+var closeModalBtn = document.getElementById('closeModalBtn');
+var modalContainer = document.getElementById('modalContainer');
+
+modalContainer.style.display = 'block';
+document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+
+
+closeModalBtn.addEventListener('click', function() {
+  modalContainer.style.display = 'none';
+  document.body.style.overflow = 'auto'; // Restore scrolling when modal is closed
+});
+
+
+
+
+
 gameHasBegin = false
 level = 0
 userClickedPattern = []
