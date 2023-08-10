@@ -6,10 +6,7 @@ modalContainer.style.display = 'block';
 document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
 
 
-closeModalBtn.addEventListener('click', function() {
-  modalContainer.style.display = 'none';
-  document.body.style.overflow = 'auto'; // Restore scrolling when modal is closed
-});
+
 
 
 
@@ -20,13 +17,16 @@ level = 0
 userClickedPattern = []
 gamePattern=[]
 buttonColors = ["red", "blue", "green", "yellow"]
-$(document).keypress(function() {
+
+closeModalBtn.addEventListener('click', function() {
+    modalContainer.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restore scrolling when modal is closed
     if (gameHasBegin === false) {
-        gameHasBegin=true
-        nextSequence()
-    }
-    
-})
+      gameHasBegin=true
+      nextSequence()
+  }
+  });
+
 $('.btn').click(function() {
     userChosenColour = $(this).attr("id")
     $("#"+userChosenColour).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
@@ -59,15 +59,28 @@ function checkAnswer(currentLevel){
           
     }
     else {
-        playSound("wrong")
-        $("body").addClass("game-over")
+        playSound("wrong");
+        $("body").addClass("game-over");
         setTimeout(function () {
-            $("body").removeClass("game-over")
-        },200)
-        $("#level-title").text("Game Over, Press Any Key to Restart")
-        setTimeout(function () {
-            startOver()
-        },200)
+          $("body").removeClass("game-over");
+        }, 200);
+      
+        var gameOverText = $("<h6>").text("Game Over, Press \"Go Again\" to Restart").addClass("game-over-text");
+        var restartButton = document.createElement("button");
+        
+        restartButton.textContent = "Go Again";
+        restartButton.classList.add("go-again"); // Adding a class to the button
+        restartButton.addEventListener("click", function () {
+          startOver();
+          restartButton.parentNode.removeChild(restartButton);
+          gameOverText.remove();
+        });
+      
+        var container = document.createElement("div");
+        container.appendChild(gameOverText[0]);
+        container.appendChild(restartButton);
+        
+        $("#level-title").empty().append(container);
       }
 }
 function startOver() {
@@ -75,4 +88,5 @@ function startOver() {
     level = 0
     userClickedPattern = []
     gamePattern=[]
+    nextSequence()
 }
