@@ -46,6 +46,7 @@ p {
 #closeModalBtn:hover {
   background-color: #fff;
   color: #011F3F;
+  border: 2px solid #011F3F; /* Add border color on hover */
 }
 
 body {
@@ -100,4 +101,23 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+.go-again {
+  display: block;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  border: 4px solid #FEF2BF;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: transparent;
+  color: #FEF2BF;
+}
+
+.go-again:hover {
+  background-color: #FEF2BF;
+  color: #011F3F;
 }
